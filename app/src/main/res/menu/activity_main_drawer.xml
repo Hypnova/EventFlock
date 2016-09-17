@@ -8,7 +8,7 @@
             android:title="Messages" />
         <item
             android:id="@+id/nav_create"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_menu_lightbulb"
             android:title="Create Event" />
         <item
             android:id="@+id/nav_slideshow"
