@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "461189134675",
+    "firebase_url": "https://hackthenorth-6e251.firebaseio.com",
+    "project_id": "hackthenorth-6e251",
+    "storage_bucket": "hackthenorth-6e251.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461189134675:android:e5fa0c1ccaa60178",
+        "android_client_info": {
+          "package_name": "me.hypnova.eventflock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461189134675-fo6q4nat9btogt5td95svq180sq2aqf6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.hypnova.eventflock",
+            "certificate_hash": "EE82628085FA3E35A72A3F843011002CD4883E1E"
+          }
+        },
+        {
+          "client_id": "461189134675-b3858v9411gd6kjbon3aqm3uot7ln83b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIXaNDrPpz8-evjZ3_M-uZ3Xb60sKfZ7o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
