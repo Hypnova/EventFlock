@@ -9,5 +9,4 @@ public class Person {
     private String name;
     private String about;
     private List<Person> liked, disliked;
-
 }
