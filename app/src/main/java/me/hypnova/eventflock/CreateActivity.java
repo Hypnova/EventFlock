@@ -90,9 +90,9 @@ public class CreateActivity extends AppCompatActivity
     }
 
     public void createEvent(View view) {
-        String name = findViewById(R.id.name).toString();
-        String description = findViewById(R.id.description).toString();
-        String location = findViewById(R.id.location).toString();
+        String name = ((EditText)(findViewById(R.id.name)))getText().toString();
+        String description = ((EditText)(findViewById(R.id.description))).getText().toString();
+        String location = ((EditText)(findViewById(R.id.location))).getText().toString();
         Calendar time = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
 
         DatePicker d_picker = (DatePicker)findViewById(R.id.date);

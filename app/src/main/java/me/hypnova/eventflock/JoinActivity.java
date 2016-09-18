@@ -80,12 +80,8 @@ public class JoinActivity extends AppCompatActivity
     }
 
 
-    public void codefield(View view) {
-
-    }
-
     public void submitbutton(View view) {
-
+        String code = findViewById(R.id.name).toString();;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
