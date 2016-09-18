@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,8 +38,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         if (user != null) {
+            // signed in
             FirebaseDatabase.getInstance().getReference("users/" +user.getUid()).setValue(user);
         } else {
             // not signed in
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         } else if (user != null && id == R.id.nav_exit) {
             auth.signOut();
         } else if (user == null && id == R.id.nav_login){
-
+            //AuthCredential credential = GoogleAuthProvider.getCredential();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
