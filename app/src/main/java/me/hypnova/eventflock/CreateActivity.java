@@ -84,22 +84,22 @@ public class CreateActivity extends AppCompatActivity
     }
 
     public void createEvent(View view) {
-        /*String name = (EditText) findById("name").getText().toString();
-        String description = (EditText) findById("description").getText().toString();
-        String location = (EditText) findById("location").getText().toString();
-        Calendar time = new Calendar(TimeZone.getDefault(), Locale.getDefault());
+        String name = findViewById(R.id.name).toString();
+        String description = findViewById(R.id.description).toString();
+        String location = findViewById(R.id.location).toString();
+        Calendar time = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
 
-        DatePicker d_picker = (DatePicker)findById("date");
-        time.setYear(d_picker.getYear());
-        time.setMonth(d_picker.getMonth());
-        time.setDay(d_picket.getDay());
+        DatePicker d_picker = (DatePicker)findViewById(R.id.date);
+        time.set(Calendar.YEAR, d_picker.getYear());
+        time.set(Calendar.MONTH, d_picker.getMonth());
+        time.set(Calendar.DAY_OF_MONTH, d_picker.getDayOfMonth());
 
-        TimePicker t_picker = (TimePicker)findById("time");
-        time.setHour(t_picker.getHour());
-        time.setMinute(t_picker.getMinute());
+        TimePicker t_picker = (TimePicker)findViewById(R.id.time);
+        time.set(Calendar.HOUR_OF_DAY,t_picker.getHour());
+        time.set(Calendar.MINUTE,t_picker.getMinute());
 
-        Event e = new Event(name,description,location,time);*/
-        //MainActivity.database.getReference("group/" + user.getUid()).setValue(user);
+        Event e = new Event(name,description,location,time);
+       // String key = MainActivity.database.getReference("group/").push().getKey();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
