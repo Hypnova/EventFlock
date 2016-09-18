@@ -10,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.firebase.ui.auth.AuthUI;
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MainActivity extends AppCompatActivity
@@ -36,16 +38,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
             // already signed in
+            FirebaseDatabase.getInstance().getReference("users/" +user.getUid()).setValue(user);
+        } else {
+            // not signed in
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setProviders(AuthUI.GOOGLE_PROVIDER)
                             .build(),
                     0);
-        } else {
-            // not signed in
         }
     }
 
