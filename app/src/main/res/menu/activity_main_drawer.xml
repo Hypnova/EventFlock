@@ -22,6 +22,10 @@
             android:id="@+id/nav_exit"
             android:icon="@drawable/ic_menu_exit"
             android:title="Log Out"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_self"
+            android:title="About Me"/>
     </group>
 
 </menu>
