@@ -99,7 +99,8 @@ public class CreateActivity extends AppCompatActivity
         time.set(Calendar.MINUTE,t_picker.getMinute());
 
         Event e = new Event(name,description,location,time);
-       // String key = MainActivity.database.getReference("group/").push().getKey();
+        String key = MainActivity.database.getReference("group/").push().getKey();
+        MainActivity.database.getReference().child("group/").child(key).setValue(e);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
