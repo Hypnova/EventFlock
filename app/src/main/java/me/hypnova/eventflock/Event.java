@@ -85,6 +85,4 @@ public class Event {
     public void removeAdmin(Person p) {
         this.admins.remove(p);
     }
-
-
 }

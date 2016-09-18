@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -27,10 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    static FirebaseAuth auth = FirebaseAuth.getInstance();
-    static FirebaseUser user = auth.getCurrentUser();
-    static TextView cardText1, cardText2;
-    static ImageView cardImage1;
+    static TextView navName;
 
 
     @Override
@@ -48,16 +44,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        /*
-        * cardImage1 = (ImageView)findViewById(R.id.cardImage1);
-        * cardImage1.setImage(currPerson.getUri);
-        * cardText1  = (TextView)findViewById(R.id.cardText1);
-        * cardText1.setText(currPerson.getName());
-        * cardText2  = (TextView)findViewById(R.id.cardText2);
-        * cardText2.setText(currPerson.getAbout());
-        * */
-
     }
 
     @Override
@@ -109,7 +95,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(i);
         } else if (id == R.id.nav_join) {
 
-        } else if (user != null && id == R.id.nav_exit) {
+        } else if (LoginActivity.user != null && id == R.id.nav_exit) {
             AuthUI.getInstance()
                     .signOut(this).
                     addOnCompleteListener (new OnCompleteListener <Void>(){
