@@ -16,9 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,23 +24,16 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.util.Calendar;
-import java.util.TimeZone;
-import java.util.Locale;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-
 /**
- * Created by Siavash Samiei on 9/17/2016.
+ * Created by Atharva on 2016-09-18.
  */
-public class CreateActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener{
+public class JoinActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create);
+        setContentView(R.layout.activity_join);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -89,51 +79,13 @@ public class CreateActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void createEvent(View view) {
-        String name = findViewById(R.id.name).toString();
-        String description = findViewById(R.id.description).toString();
-        String location = findViewById(R.id.location).toString();
-        Calendar time = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
 
-        DatePicker d_picker = (DatePicker)findViewById(R.id.date);
-        time.set(Calendar.YEAR, d_picker.getYear());
-        time.set(Calendar.MONTH, d_picker.getMonth());
-        time.set(Calendar.DAY_OF_MONTH, d_picker.getDayOfMonth());
+    public void codefield(View view) {
 
-        TimePicker t_picker = (TimePicker)findViewById(R.id.time);
-        time.set(Calendar.HOUR_OF_DAY,t_picker.getHour());
-        time.set(Calendar.MINUTE,t_picker.getMinute());
+    }
 
-        Event e = new Event(name,description,location,time);
-        String key = MainActivity.database.getReference("group/").push().getKey();
-        List <Character> list = new ArrayList<Character>();
+    public void submitbutton(View view) {
 
-        for(int k=0;k<key.length();k++)
-            list.add(key.charAt(k));
-
-        Collections.shuffle(list);
-        key = "";
-
-        for (int c=0;c<6;c++)
-            key += list.get(c);
-
-        e.setCode(key);
-        e.addAdmin(new Person(MainActivity.user.getDisplayName(), , MainActivity.user.getUid(), MainActivity.user.getPhotoUrl()));
-
-        MainActivity.database.getReference().child("group/").child(key).setValue(e);
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setTitle("Generated Code");
-        builder1.setMessage("Your code is " + key + ". Share it with others who want to join your event!");
-        builder1.setCancelable(true);
-        builder1.setNeutralButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
