@@ -73,6 +73,34 @@ public class CreateActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+=======
+    public void createEvent(View view) {
+        String name = (EditText) findById("name").getText().toString();
+        String description = (EditText) findById("description").getText().toString();
+        String location = (EditText) findById("location").getText().toString();
+        Calendar time = new Calendar(TimeZone.getDefault(), Locale.getDefault());
+
+        DatePicker d_picker = (DatePicker)findById("date");
+        time.setYear(d_picker.getYear());
+        time.setMonth(d_picker.getMonth());
+        time.setDay(d_picket.getDay());
+
+        TimePicker t_picker = (TimePicker)findById("time");
+        time.setHour(t_picker.getHour());
+        time.setMinute(t_picker.getMinute());
+
+        Event e = new Event(name,description,location,time);
+        //MainActivity.database.getReference("group/" + user.getUid()).setValue(user);
+
+    }
+>>>>>>> origin/master
+
+>>>>>>> origin/master
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
