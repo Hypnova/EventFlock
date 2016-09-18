@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -24,10 +25,11 @@
             android:label="Create Event"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.inent.action.CREATE"/>
+                <action android:name="android.inent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
     </application>
 </manifest>
