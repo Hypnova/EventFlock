@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity
 
     static FirebaseAuth auth = FirebaseAuth.getInstance();
     static FirebaseUser user = auth.getCurrentUser();
-    static FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         if (user != null) {
             // User is signed in
-            database.getReference("users/" + user.getUid()).setValue(user);
+            FirebaseDatabase.getInstance().getReference("users/" + user.getUid()).setValue(user);
 
         } else {
             // User is signed out
