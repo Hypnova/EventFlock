@@ -16,10 +16,9 @@ public class Event {
     private List<Person> people;
     private List<Person> admins;
 
-    public Event(String name, String description, String code, String location, Calendar time) {
+    public Event(String name, String description, String location, Calendar time) {
         this.name = name;
         this.description = description;
-        this.code = code;
         this.location = location;
         this.time = time;
         this.people = new ArrayList<Person>();
@@ -41,6 +40,8 @@ public class Event {
     public String getCode() {
         return code;
     }
+
+    public void setCode(String code) { this.code = code; }
 
     public String getDescription() {
         return description;
