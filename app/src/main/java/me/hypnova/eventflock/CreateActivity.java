@@ -2,6 +2,7 @@ package me.hypnova.eventflock;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 /**
  * Created by Siavash Samiei on 9/17/2016.
@@ -86,6 +91,13 @@ public class CreateActivity extends AppCompatActivity
         } else if (id == R.id.nav_join) {
 
         } else if (id == R.id.nav_exit) {
+            AuthUI.getInstance()
+                    .signOut(this).
+                    addOnCompleteListener (new OnCompleteListener<Void>(){
+                        public void onComplete (@NonNull Task<Void> task){
+                            startActivity(new Intent(CreateActivity.this, MainActivity.class));
+                            finish();
+                        }});
 
         }
 
