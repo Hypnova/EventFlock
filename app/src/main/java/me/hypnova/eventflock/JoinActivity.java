@@ -100,7 +100,6 @@ public class JoinActivity extends AppCompatActivity
             Intent i = new Intent(this,CreateActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_join) {
-            startActivity(new Intent(CreateActivity.this, JoinActivity.class));
             finish();
         } else if (id == R.id.nav_exit) {
             AuthUI.getInstance()
