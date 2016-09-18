@@ -1,5 +1,6 @@
 package me.hypnova.eventflock;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -34,6 +36,7 @@ import java.util.Locale;
  */
 public class CreateActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +102,21 @@ public class CreateActivity extends AppCompatActivity
         time.set(Calendar.MINUTE,t_picker.getMinute());
 
         Event e = new Event(name,description,location,time);
-        String key = MainActivity.database.getReference("group/").push().getKey();
+        String key = MainActivity.database.getReference("group/").push().getKey().substring(0, 6);
         MainActivity.database.getReference().child("group/").child(key).setValue(e);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Your Key Is:");
+        builder1.setMessage(key);
+        builder1.setCancelable(true);
+        builder1.setNeutralButton(android.R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
