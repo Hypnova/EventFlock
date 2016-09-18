@@ -14,6 +14,7 @@ public class Event {
     private String location;
     private Calendar time;
     private List<Person> people;
+    private List<Person> admins;
 
     public Event(String name, String description, String code, String location, Calendar time) {
         this.name = name;
@@ -22,6 +23,7 @@ public class Event {
         this.location = location;
         this.time = time;
         this.people = new ArrayList<Person>();
+        this.admins = new ArrayList<Person>();
     }
 
     public Calendar getTime() {
@@ -71,4 +73,18 @@ public class Event {
     public void removePerson(Person p) {
         this.people.remove(p);
     }
+
+    public List<Person> getAdmin (){
+        return admins;
+    }
+
+    public void addAdmin(Person p) {
+        this.admins.add(p);
+    }
+
+    public void removeAdmin(Person p) {
+        this.admins.remove(p);
+    }
+
+
 }
