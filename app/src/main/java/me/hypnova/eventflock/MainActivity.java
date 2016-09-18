@@ -38,14 +38,14 @@ public class MainActivity extends AppCompatActivity
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             // already signed in
+        } else {
+            // not signed in
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
                             .setProviders(AuthUI.GOOGLE_PROVIDER)
                             .build(),
                     0);
-        } else {
-            // not signed in
         }
     }
 
