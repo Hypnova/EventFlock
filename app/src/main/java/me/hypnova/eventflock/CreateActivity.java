@@ -30,6 +30,9 @@ import com.google.android.gms.tasks.Task;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.Locale;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Siavash Samiei on 9/17/2016.
@@ -102,7 +105,19 @@ public class CreateActivity extends AppCompatActivity
         time.set(Calendar.MINUTE,t_picker.getMinute());
 
         Event e = new Event(name,description,location,time);
-        String key = MainActivity.database.getReference("group/").push().getKey().substring(0, 6);
+        String key = MainActivity.database.getReference("group/").push().getKey();
+        List <Character> list = new ArrayList<Character>();
+
+        for(int k=0;k<key.length();k++)
+            list.add(key.charAt(k));
+
+        Collections.shuffle(list);
+
+        key = "";
+
+        for (int c=0;c<6;c++)
+            key += list.get(c);
+
         MainActivity.database.getReference().child("group/").child(key).setValue(e);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setTitle("Generated Code");
