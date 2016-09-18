@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +25,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.Locale;
 
@@ -79,12 +83,8 @@ public class CreateActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
-
-
-=======
     public void createEvent(View view) {
-        String name = (EditText) findById("name").getText().toString();
+        /*String name = (EditText) findById("name").getText().toString();
         String description = (EditText) findById("description").getText().toString();
         String location = (EditText) findById("location").getText().toString();
         Calendar time = new Calendar(TimeZone.getDefault(), Locale.getDefault());
@@ -98,11 +98,9 @@ public class CreateActivity extends AppCompatActivity
         time.setHour(t_picker.getHour());
         time.setMinute(t_picker.getMinute());
 
-        Event e = new Event(name,description,location,time);
+        Event e = new Event(name,description,location,time);*/
         //MainActivity.database.getReference("group/" + user.getUid()).setValue(user);
-
     }
->>>>>>> origin/master
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

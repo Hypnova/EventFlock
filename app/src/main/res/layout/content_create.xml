@@ -102,11 +102,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_alignBottom="@+id/scrollView"
                 android:layout_centerHorizontal="true"
-<<<<<<< HEAD
                 android:onClick="createEvent"/>
-=======
-                android:onClick="createEvent" />
->>>>>>> origin/master
 
         </LinearLayout>
     </ScrollView>
