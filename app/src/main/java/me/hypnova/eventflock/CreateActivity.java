@@ -105,8 +105,8 @@ public class CreateActivity extends AppCompatActivity
         String key = MainActivity.database.getReference("group/").push().getKey().substring(0, 6);
         MainActivity.database.getReference().child("group/").child(key).setValue(e);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setTitle("Your Key Is:");
-        builder1.setMessage(key);
+        builder1.setTitle("Generated Code");
+        builder1.setMessage("Your code is " + key + ". Share it with others who want to join your event!");
         builder1.setCancelable(true);
         builder1.setNeutralButton(android.R.string.ok,
                 new DialogInterface.OnClickListener() {
