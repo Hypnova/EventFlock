@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -81,7 +82,12 @@ public class JoinActivity extends AppCompatActivity
 
 
     public void submitbutton(View view) {
-        String code = findViewById(R.id.name).toString();;
+        String code = ((EditText)(findViewById(R.id.name))).getText().toString();
+
+        if(MainActivity.database.getReference().child("/group").equalTo(code)) {
+            startActivity(new Intent (JoinActivity.this, MainActivity.class));
+            finish();
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -106,7 +112,7 @@ public class JoinActivity extends AppCompatActivity
                     .signOut(this).
                     addOnCompleteListener (new OnCompleteListener<Void>(){
                         public void onComplete (@NonNull Task<Void> task){
-                            startActivity(new Intent(CreateActivity.this, MainActivity.class));
+                            startActivity(new Intent(JoinActivity.this, MainActivity.class));
                             finish();
                         }});
 
