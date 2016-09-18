@@ -32,18 +32,23 @@
                 android:layout_height="fill_parent">
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:textStyle="bold" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Siavash Samiei"
+                    android:id="@+id/textView2"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="105dp" />
 
                 <TextView
-                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView"
-                    android:layout_marginTop="10dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Proficient in: Java, C++, HTML, CSS, Android, Node.js. Current ideas: EventFlock!"
+                    android:id="@+id/textView3"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
