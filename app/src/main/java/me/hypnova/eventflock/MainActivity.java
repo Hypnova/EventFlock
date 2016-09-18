@@ -2,6 +2,7 @@ package me.hypnova.eventflock;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,10 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ui.email.SignInActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
@@ -21,6 +28,8 @@ public class MainActivity extends AppCompatActivity
 
     static FirebaseAuth auth = FirebaseAuth.getInstance();
     static FirebaseUser user = auth.getCurrentUser();
+    static TextView navName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +47,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (user != null) {
-            // signed in
-            FirebaseDatabase.getInstance().getReference("users/" +user.getUid()).setValue(user);
-        } else {
-            // not signed in
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setProviders(AuthUI.GOOGLE_PROVIDER)
-                            .build(),
-                    0);
-        }
     }
 
     @Override
@@ -102,9 +99,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_join) {
 
         } else if (user != null && id == R.id.nav_exit) {
-            auth.signOut();
-        } else if (user == null && id == R.id.nav_login){
-            //AuthCredential credential = GoogleAuthProvider.getCredential();
+            AuthUI.getInstance()
+                    .signOut(this).
+                    addOnCompleteListener (new OnCompleteListener <Void>(){
+                public void onComplete (@NonNull Task<Void> task){
+                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                finish();
+            }
+            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
