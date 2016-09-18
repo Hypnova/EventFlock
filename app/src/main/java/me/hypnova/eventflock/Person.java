@@ -49,6 +49,8 @@ public class Person {
 
     public String getUid() { return Uid; }
 
+    public void setUid(String s){this.Uid = s;}
+
     public void addLiked(Person p) {
         this.liked.add(p);
     }
@@ -69,6 +71,8 @@ public class Person {
         return profilePic;
     }
 
+    public void setProfilePic(Uri p){ this.profilePic = p;}
+
     public List<Person> getLiked() {
         return liked;
     }
@@ -79,5 +83,11 @@ public class Person {
 
     public List<Person> getNeutral() {
         return neutral;
+    }
+
+    public Person(){
+        this.liked = new ArrayList <Person>();
+        this.disliked = new ArrayList<Person>();
+        this.neutral = new ArrayList<Person>();
     }
 }

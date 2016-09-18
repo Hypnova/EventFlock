@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +23,13 @@ import android.widget.TimePicker;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -39,6 +43,9 @@ import java.util.Collections;
  */
 public class CreateActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener{
+
+    private String m_Text = "";
+    static Event e;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +77,6 @@ public class CreateActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -81,16 +87,13 @@ public class CreateActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
 
     public void createEvent(View view) {
-        String name = ((EditText)(findViewById(R.id.name)))getText().toString();
+        String name = ((EditText)(findViewById(R.id.name))).getText().toString();
         String description = ((EditText)(findViewById(R.id.description))).getText().toString();
         String location = ((EditText)(findViewById(R.id.location))).getText().toString();
         Calendar time = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
@@ -104,7 +107,7 @@ public class CreateActivity extends AppCompatActivity
         time.set(Calendar.HOUR_OF_DAY,t_picker.getHour());
         time.set(Calendar.MINUTE,t_picker.getMinute());
 
-        Event e = new Event(name,description,location,time);
+        e = new Event(name,description,location,time);
         String key = MainActivity.database.getReference("group/").push().getKey();
         List <Character> list = new ArrayList<Character>();
 
@@ -118,8 +121,7 @@ public class CreateActivity extends AppCompatActivity
             key += list.get(c);
 
         e.setCode(key);
-        e.addAdmin(new Person(MainActivity.user.getDisplayName(), , MainActivity.user.getUid(), MainActivity.user.getPhotoUrl()));
-
+        e.addAdmin(MainActivity.currUser);
         MainActivity.database.getReference().child("group/").child(key).setValue(e);
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setTitle("Generated Code");
@@ -152,8 +154,32 @@ public class CreateActivity extends AppCompatActivity
             Intent i = new Intent(this,CreateActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_join) {
-            startActivity(new Intent(CreateActivity.this, JoinActivity.class));
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Title");
+
+            // Set up the input
+            final EditText input = new EditText(this);
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    m_Text = input.getText().toString();
+                    submitbutton(m_Text);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+
         } else if (id == R.id.nav_exit) {
             AuthUI.getInstance()
                     .signOut(this).
@@ -163,10 +189,33 @@ public class CreateActivity extends AppCompatActivity
                             finish();
                         }});
 
+        }else if (id == R.id.nav_about){
+            Intent i = new Intent(this,AboutActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void submitbutton(String s) {
+        final String code = s;
+
+        MainActivity.database.getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(code)) {
+                    e.addPerson(MainActivity.currUser);
+                    startActivity(new Intent (CreateActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
